@@ -1,0 +1,19 @@
+// get all the account records and get the number of occurance of the first letter of each record.
+page_no = 1;
+per_page = 200;
+loop_list = ".".rightPad(20).toList("");
+all_accounts_list = list();
+characters_map = Map();
+for each num in loop_list
+{
+	accounts = zoho.crm.getRecords("Accounts", page_no, per_page, {"fields": "Account_Name"});
+	for each account in accounts
+	{	
+		Account_Name = account.get("Account_Name");
+		characters_map.put(Account_Name.subString(0, 1), ifnull(characters_map.get(Account_Name.subString(0, 1)), 0) + 1);
+	}
+}
+info characters_map;
+return "";
+
+
